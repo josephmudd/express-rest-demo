@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const User = require('../handlers/user');
 
 /**
  * This function comment is parsed by doctrine
@@ -21,17 +22,13 @@ router.get('/api', (req, res) => {
  * @returns {Error}  default - Unexpected error
  */
 router.post('/api', (req, res) => {
-    const errors = [];
-    if (!req.body.email) {
-        errors.push('email is required');
+    let output;
+    try {
+        output = User.create(req.body);
+    } catch (errors) {
+        return res.status(400).json({ errors })
     }
-    if (req.body.zipcode && !(/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(req.body.zipcode))) {
-        errors.push('zipcode must be valid');
-    }
-    if (errors.length) {
-        return res.status(400).json({ errors });
-    }
-    res.json(Object.assign({ id: 1 }, req.body));
+    res.json(output);
 });
 
 module.exports = router;
