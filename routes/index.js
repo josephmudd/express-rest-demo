@@ -21,6 +21,16 @@ router.get('/api', (req, res) => {
  * @returns {Error}  default - Unexpected error
  */
 router.post('/api', (req, res) => {
+    const errors = [];
+    if (!req.body.email) {
+        errors.push('email is required');
+    }
+    if (req.body.zipcode && !(/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(req.body.zipcode))) {
+        errors.push('zipcode must be valid');
+    }
+    if (errors.length) {
+        return res.status(400).json({ errors });
+    }
     res.json(Object.assign({ id: 1 }, req.body));
 });
 
