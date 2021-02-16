@@ -1,10 +1,10 @@
-function create(input) {
+function create(input = {}) {
     const errors = [];
     if (!input.email) {
         errors.push('email is required');
     }
-    if (input.zipcode && !(/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(input.zipcode))) {
-        errors.push('zipcode must be valid');
+    if (!input.zipCode || input.zipCode && !(/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(input.zipCode))) {
+        errors.push('zipCode must be valid');
     }
     if (errors.length) {
         throw errors;
