@@ -1,3 +1,5 @@
+const model = require('../models');
+
 function create(input = {}) {
     const errors = [];
     if (!input.email) {
@@ -9,11 +11,14 @@ function create(input = {}) {
     if (errors.length) {
         throw errors;
     }
-    return Object.assign({ id: 1 }, input);
+    return model.User.create(input);
 }
 
 function read(id = null) {
-
+    if (id) {
+        return model.User.findOne({ where: { id } });
+    }
+    return model.User.findAll();
 }
 
 module.exports =  { create, read };

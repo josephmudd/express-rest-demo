@@ -1,5 +1,9 @@
 const express = require('express');
 const router = require('./routes');
+const model = require('./models');
+
+require('dotenv').config();
+console.log(process.env);
 
 const app = express();
 app.use(express.json());
@@ -13,6 +17,15 @@ app.use((req, res, next) => {
 
 app.use('/', router);
 
-app.listen(3000, () => {
-    console.log('express-rest-demo listening on port 3000');
-});
+model.init({
+    username: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    host: process.env.HOST,
+    port: process.env.PORT,
+    database: process.env.DATABASE,
+})
+    .then(() => {
+        app.listen(3000, () => {
+            console.log('express-rest-demo listening on port 3000');
+        });        
+    });
