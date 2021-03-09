@@ -18,11 +18,11 @@ app.use((req, res, next) => {
 app.use('/', router);
 
 model.init({
-    username: process.env.USERNAME,
-    password: process.env.PASSWORD,
-    host: process.env.HOST,
-    port: process.env.PORT,
-    database: process.env.DATABASE,
+    username: process.env.SQL_USERNAME,
+    password: process.env.SQL_PASSWORD,
+    host: process.env.SQL_HOST,
+    port: process.env.SQL_PORT,
+    database: process.env.SQL_DATABASE,
 })
     .then(() => {
         app.listen(3000, () => {
