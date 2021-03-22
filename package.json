@@ -28,6 +28,7 @@
     "express-swagger-generator": "^1.1.17",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
+    "sequelize-cli": "^6.2.0",
     "sinon": "^9.2.4"
   }
 }
